@@ -13,9 +13,9 @@ source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 
 alias grep='grep --color=auto'
 alias ls='ls --color=auto'
-alias card='arduino-cli compile --fqbn esp32:esp32:esp32doit-devkit-v1 $1'
-alias uard='arduino-cli upload --fqbn esp32:esp32:esp32doit-devkit-v1 --port /dev/ttyUSB0 $1'
-alias mard='arduino-cli monitor -p /dev/ttyUSB0 --config 115200'
+# alias card='arduino-cli compile --fqbn esp32:esp32:esp32doit-devkit-v1 $1'
+# alias uard='arduino-cli upload --fqbn esp32:esp32:esp32doit-devkit-v1 --port /dev/ttyUSB0 $1'
+# alias mard='arduino-cli monitor -p /dev/ttyUSB0 --config 115200'
 
 autoload -Uz compinit && compinit
-[ -f /opt/miniconda3/etc/profile.d/conda.sh ] && source /opt/miniconda3/etc/profile.d/conda.sh
+# [ -f /opt/miniconda3/etc/profile.d/conda.sh ] && source /opt/miniconda3/etc/profile.d/conda.sh
