@@ -18,4 +18,4 @@ alias ls='ls --color=auto'
 # alias mard='arduino-cli monitor -p /dev/ttyUSB0 --config 115200'
 
 autoload -Uz compinit && compinit
-# [ -f /opt/miniconda3/etc/profile.d/conda.sh ] && source /opt/miniconda3/etc/profile.d/conda.sh
+[ -f /opt/miniconda3/etc/profile.d/conda.sh ] && source /opt/miniconda3/etc/profile.d/conda.sh
