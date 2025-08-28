@@ -1,21 +1,30 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
+# zmodload zsh/zprof
+
+# Powerlevel10k instant prompt
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# Powerlevel10k
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+# Aliases
 alias grep='grep --color=auto'
 alias ls='ls --color=auto'
-# alias card='arduino-cli compile --fqbn esp32:esp32:esp32doit-devkit-v1 $1'
-# alias uard='arduino-cli upload --fqbn esp32:esp32:esp32doit-devkit-v1 --port /dev/ttyUSB0 $1'
-# alias mard='arduino-cli monitor -p /dev/ttyUSB0 --config 115200'
 
-autoload -Uz compinit && compinit
-[ -f /opt/miniconda3/etc/profile.d/conda.sh ] && source /opt/miniconda3/etc/profile.d/conda.sh
+# Faster compinit (use cache)
+autoload -Uz compinit
+compinit -C
+
+# Lazy-load conda (much faster startup)
+_conda_lazy() {
+  source /opt/miniconda3/etc/profile.d/conda.sh
+  conda "$@"
+}
+alias conda=_conda_lazy
+
+# zsh-syntax-highlighting must be last
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# zprof
