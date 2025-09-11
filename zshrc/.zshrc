@@ -17,13 +17,7 @@ alias ls='ls --color=auto'
 autoload -Uz compinit
 compinit -C
 
-# Lazy-load conda (much faster startup)
-_conda_lazy() {
-  source /opt/miniconda3/etc/profile.d/conda.sh
-  conda "$@"
-}
-alias conda=_conda_lazy
-
+[ -f /opt/miniconda3/etc/profile.d/conda.sh ] && source /opt/miniconda3/etc/profile.d/conda.sh
 # zsh-syntax-highlighting must be last
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
