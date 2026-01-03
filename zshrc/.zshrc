@@ -13,6 +13,7 @@ source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 alias grep='grep --color=auto'
 alias ls='ls --color=auto'
 alias cCalidad='cd /home/devbox/Documents/Calidad'
+bindkey -v
 
 # Faster compinit (use cache)
 autoload -Uz compinit
