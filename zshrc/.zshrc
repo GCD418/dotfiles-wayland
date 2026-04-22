@@ -12,14 +12,27 @@ source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 # Aliases
 alias grep='grep --color=auto'
 alias ls='ls --color=auto'
-alias cCalidad='cd /home/devbox/Documents/Calidad'
 bindkey -v
 
 # Faster compinit (use cache)
 autoload -Uz compinit
 compinit -C
 
-[ -f /opt/miniconda3/etc/profile.d/conda.sh ] && source /opt/miniconda3/etc/profile.d/conda.sh
+# [ -f /opt/miniconda3/etc/profile.d/conda.sh ] && source /opt/miniconda3/etc/profile.d/conda.sh
+# Lazy Load para Conda (Carga diferida para arrancar Zsh rápido)
+conda() {
+    # 1. Borramos esta función temporal para no crear un bucle infinito
+    unset -f conda 
+    
+    # 2. Ahora sí, cargamos el Conda real
+    if [ -f /opt/miniconda3/etc/profile.d/conda.sh ]; then
+        source /opt/miniconda3/etc/profile.d/conda.sh
+    fi
+    
+    # 3. Ejecutamos el comando de Conda que pediste originalmente
+    conda "$@"
+}
+
 # zsh-syntax-highlighting must be last
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
