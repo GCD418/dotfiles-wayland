@@ -91,6 +91,7 @@ hl.bind(mainMod .. " + L", hl.dsp.focus({ direction = "right"} ))
 --USEFUL --
 hl.bind("PRINT", hl.dsp.exec_cmd("hyprshot-fixed.sh"))
 hl.bind("SHIFT + PRINT", hl.dsp.exec_cmd("hyprshot-fixed-region.sh"))
+
 hl.bind(mainMod .. " + SHIFT + L", hl.dsp.exec_cmd("systemctl sleep"))
 
 hl.bind(mainMod .. " + SHIFT + P",hl.dsp.dpms({ action = "toggle"}))
@@ -105,3 +106,10 @@ hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl s 5%-"), { repea
 hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
 hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"),   { locked = true })
 hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl next"),       { locked = true })
+
+--OBS--
+hl.bind("SUPER + F10", hl.dsp.pass({ window = "class:^(com\\.obsproject\\.Studio)$" }))
+
+--MOUSE--
+hl.bind("SUPER + mouse_down", hl.dsp.focus({ workspace = "e-1" }))
+hl.bind("SUPER + mouse_up", hl.dsp.focus({ workspace = "e+1" }))
