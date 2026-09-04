@@ -39,8 +39,8 @@ end)
 hl.config({
   xwayland = { force_zero_scaling = true },
   general = {
-    gaps_in = 5,
-    gaps_out = 6,
+    gaps_in = 2,
+    gaps_out = 2,
     border_size = 2,
     resize_on_border = true,
     allow_tearing = false
@@ -49,8 +49,8 @@ hl.config({
     rounding = 4,
     active_opacity = 1.0,
     inactive_opacity = 1.0,
-    shadow = { enabled = true, range = 4, render_power = 3, color = "rgba(1a1a1aee)" },
-    blur = { enabled = true, size = 3, passes = 4, new_optimizations = true, ignore_opacity = true }
+    shadow = { enabled = false, range = 4, render_power = 3, color = "rgba(1a1a1aee)" },
+    blur = { enabled = false, size = 3, passes = 4, new_optimizations = true, ignore_opacity = true }
   },
   input = {
     kb_layout = "us, latam",
@@ -67,21 +67,34 @@ hl.config({
 ---- CURVES ----
 ----------------
 
-hl.curve("slight_bounce", { type = "spring", mass = 1, stiffness = 350, dampening = 30 })
+hl.curve("fastSnap", { type = "bezier", points = { { 0.05, 0.9 }, { 0.1, 1.05 } } })
+hl.curve("smoothLinear", { type = "bezier", points = { { 0.25, 0.25 }, { 0.75, 0.75 } } })
 
-hl.curve("winIn", { type = "spring", mass = 1, stiffness = 350, dampening = 35 })
-hl.curve("winOut", { type = "spring", mass = 1, stiffness = 320, dampening = 32 })
-hl.curve("winMove", { type = "spring", mass = 1, stiffness = 300, dampening = 30 })
----- ANIMATIONS ------
-----------------------
-hl.animation({ leaf = "border", enabled = true, speed = 2, bezier = "default" })
-hl.animation({ leaf = "fade", enabled = true, speed = 4, bezier = "default" })
-hl.animation({ leaf = "workspaces", enabled = true, speed = 1, spring = "slight_bounce" })
+-- ---- ANIMATIONS ------
+hl.animation({ leaf = "border", enabled = true, speed = 2, bezier = "smoothLinear" })
+hl.animation({ leaf = "fade", enabled = true, speed = 2, bezier = "fastSnap" })
+hl.animation({ leaf = "workspaces", enabled = true, speed = 2.5, bezier = "fastSnap", style = "slide" })
+hl.animation({ leaf = "specialWorkspace", enabled = true, speed = 4, bezier = "fastSnap", style = "slidefadevert -35%" })
 
-hl.animation({ leaf = "windowsIn", enabled = true, speed = 3, spring = "winIn", style = "popin 85%" })
-hl.animation({ leaf = "windowsOut", enabled = true, speed = 3, spring = "winOut", style = "popin 85%" })
-hl.animation({ leaf = "windowsMove", enabled = true, speed = 3, spring = "winMove", style = "slide" }) ----------------------
+hl.animation({ leaf = "windowsIn", enabled = true, speed = 2, bezier = "fastSnap", style = "popin 85%" })
+hl.animation({ leaf = "windowsOut", enabled = true, speed = 2, bezier = "fastSnap", style = "popin 85%" })
+hl.animation({ leaf = "windowsMove", enabled = true, speed = 2, bezier = "fastSnap", style = "slide" })
 
+-- -- FLUID ANIMATIONS BUT RESOURCE HUNGY ----
+-- hl.curve("slight_bounce", { type = "spring", mass = 1, stiffness = 450, dampening = 70 })
+-- hl.curve("winIn", { type = "spring", mass = 1, stiffness = 450, dampening = 75 })
+-- hl.curve("winOut", { type = "spring", mass = 1, stiffness = 420, dampening = 72 })
+-- hl.curve("winMove", { type = "spring", mass = 1, stiffness = 400, dampening = 70 })
+--
+-- -- ---- ANIMATIONS ------
+-- hl.animation({ leaf = "border", enabled = true, speed = 2, bezier = "default" })
+-- hl.animation({ leaf = "fade", enabled = true, speed = 4, bezier = "default" })
+-- hl.animation({ leaf = "workspaces", enabled = true, speed = 1, spring = "slight_bounce" })
+--
+-- hl.animation({ leaf = "windowsIn", enabled = true, speed = 3, spring = "winIn", style = "popin 85%" })
+-- hl.animation({ leaf = "windowsOut", enabled = true, speed = 3, spring = "winOut", style = "popin 85%" })
+-- hl.animation({ leaf = "windowsMove", enabled = true, speed = 3, spring = "winMove", style = "slide" })
+--
 -- ==========================================
 -- 5. KEYBINDS
 -- ==========================================
